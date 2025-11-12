@@ -1037,16 +1037,85 @@ main {
   }
 }
 
+/* Hide desktop links and logo on mobile, show hamburger */
+@media (max-width: 800px) {
+  .navbar__links--desktop {
+    display: none !important;
+  }
+
+  .navbar__brand--desktop {
+    display: none !important;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  .navbar {
+    grid-template-columns: 1fr;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.9rem 1.2rem;
+  }
+
+  .navbar__hamburger {
+    margin-left: auto;
+  }
+
+  main {
+    padding-top: 85px;
+  }
+}
+
+@media (max-width: 540px) {
+  .section {
+    padding-inline: 1.1rem;
+  }
+
+  .navbar {
+    left: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .navbar__mobile-menu {
+    right: 0.75rem;
+    top: 70px;
+  }
+
+  .hero__card,
+  .contact__card,
+  .resume__item,
+  .about__card,
+  .projects__card {
+    border-radius: 18px;
+  }
+
+  .hero__card h1 {
+    font-size: 2.2rem;
+  }
+
+  .section-heading h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .navbar__mobile-menu {
+    top: 68px;
+    min-width: 160px;
+  }
+
+  .navbar__mobile-link {
+    font-size: 0.9rem;
+    padding: 0.7rem 0.9rem;
+  }
+
+  .hero__card h1 {
+    font-size: 1.9rem;
+  }
+}
+
 @media (max-width: 360px) {
-  .navbar__brand-icon {
-    width: 36px;
-    height: 36px;
-  }
-
-  .navbar__brand-text {
-    font-size: 0.8rem;
-  }
-
   .navbar__hamburger span {
     width: 22px;
   }
