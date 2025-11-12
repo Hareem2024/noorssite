@@ -21,7 +21,7 @@ export default function NavBar({ sections, activeSection }) {
     const target = document.getElementById(id);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setMobileMenuOpen(false); // Close menu after clicking
+      setMobileMenuOpen(false);
     }
   };
 
@@ -33,7 +33,7 @@ export default function NavBar({ sections, activeSection }) {
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}
       >
-        <a href="#home" className="navbar__brand" onClick={(event) => handleNavClick(event, 'home')}>
+        <a href="#home" className="navbar__brand navbar__brand--desktop" onClick={(event) => handleNavClick(event, 'home')}>
           <span className="navbar__brand-icon" aria-hidden="true">
             <span className="navbar__brand-node navbar__brand-node--primary" />
             <span className="navbar__brand-node navbar__brand-node--secondary" />
@@ -85,10 +85,10 @@ export default function NavBar({ sections, activeSection }) {
             {/* Dropdown Menu */}
             <motion.div
               className="navbar__mobile-menu"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
+              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
             >
               {sections.map(({ id, label }, index) => (
                 <motion.button
@@ -96,11 +96,11 @@ export default function NavBar({ sections, activeSection }) {
                   className={`navbar__mobile-link ${activeSection === id ? 'navbar__mobile-link--active' : ''}`}
                   onClick={(event) => handleNavClick(event, id)}
                   type="button"
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: 10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  <span>{label}</span>
+                  {label}
                 </motion.button>
               ))}
             </motion.div>
