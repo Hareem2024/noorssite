@@ -55,8 +55,10 @@ main {
   transform: translateX(-50%);
   width: min(92vw, 980px);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 0.75rem;
   padding: 0.75rem 1.2rem;
   border-radius: 999px;
   backdrop-filter: blur(var(--glass-blur));
@@ -80,6 +82,7 @@ main {
   color: inherit;
   font-weight: 600;
   letter-spacing: 0.04em;
+  flex-shrink: 0;
 }
 
 .navbar__brand-icon {
@@ -153,6 +156,9 @@ main {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex: 1 1 260px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .navbar__link {
@@ -733,8 +739,8 @@ main {
   }
 
   .navbar__links {
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    flex: 1 1 100%;
+    justify-content: center;
   }
 
   main {
