@@ -2,19 +2,20 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function NavBar({ sections, activeSection }) {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 32);
+    const { body } = document;
+    if (mobileMenuOpen) {
+      body.classList.add('mobile-menu-open');
+    } else {
+      body.classList.remove('mobile-menu-open');
+    }
+
+    return () => {
+      body.classList.remove('mobile-menu-open');
     };
-
-    handleScroll();
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mobileMenuOpen]);
 
   const handleNavClick = (event, id) => {
     event.preventDefault();
@@ -31,7 +32,7 @@ export default function NavBar({ sections, activeSection }) {
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}
+        className="navbar"
       >
         <a href="#home" className="navbar__brand navbar__brand--desktop" onClick={(event) => handleNavClick(event, 'home')}>
           <span className="navbar__brand-icon" aria-hidden="true">
