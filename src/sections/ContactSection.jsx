@@ -23,7 +23,6 @@ export default function ContactSection() {
     setStatus({ type: '', message: '' });
 
     try {
-      // Determine API endpoint based on environment
       const apiUrl = import.meta.env.VITE_API_URL || '/api/send-email';
 
       const response = await fetch(apiUrl, {
@@ -50,7 +49,6 @@ export default function ContactSection() {
         message: 'Message sent successfully! I\'ll get back to you soon.',
       });
       
-      // Reset form
       setFormData({
         name: '',
         email: '',
@@ -112,10 +110,7 @@ export default function ContactSection() {
                   status.type === 'success'
                     ? 'rgba(39, 211, 177, 0.15)'
                     : 'rgba(255, 87, 87, 0.15)',
-                color:
-                  status.type === 'success'
-                    ? 'var(--text-primary)'
-                    : 'var(--text-primary)',
+                color: 'var(--text-primary)',
                 border: `1px solid ${
                   status.type === 'success'
                     ? 'rgba(39, 211, 177, 0.3)'
