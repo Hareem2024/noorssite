@@ -42,7 +42,7 @@ export default function ContactSection() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to send email');
+        throw new Error(data.details || data.error || 'Failed to send email');
       }
 
       setStatus({
@@ -59,9 +59,10 @@ export default function ContactSection() {
       });
     } catch (error) {
       console.error('Email sending error:', error);
+      const errorMessage = error.message || 'Failed to send message. Please try again or email me directly at noorejaz576@gmail.com';
       setStatus({
         type: 'error',
-        message: 'Failed to send message. Please try again or email me directly at noorejaz576@gmail.com',
+        message: errorMessage,
       });
     } finally {
       setIsSubmitting(false);

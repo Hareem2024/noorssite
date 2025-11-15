@@ -24,14 +24,29 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
+    // Check if environment variables are set
+    if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+      console.error('Missing environment variables:', {
+        GMAIL_USER: !!process.env.GMAIL_USER,
+        GMAIL_APP_PASSWORD: !!process.env.GMAIL_APP_PASSWORD,
+      });
+      return res.status(500).json({ 
+        error: 'Server configuration error: Email credentials not configured',
+        details: 'Please check Vercel environment variables'
+      });
+    }
+
     // Create transporter using Gmail SMTP
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.GMAIL_USER, // Your Gmail address
-        pass: process.env.GMAIL_APP_PASSWORD, // Gmail App Password (not your regular password)
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
       },
     });
+
+    // Verify transporter configuration
+    await transporter.verify();
 
     // Email content
     const mailOptions = {
@@ -45,7 +60,7 @@ export default async function handler(req, res) {
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Topic:</strong> ${topic || 'Not specified'}</p>
         <h3>Message:</h3>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${String(message).replace(/\n/g, '<br>')}</p>
         <hr>
         <p><em>This message was sent from your portfolio contact form.</em></p>
       `,
@@ -65,7 +80,8 @@ This message was sent from your portfolio contact form.
     };
 
     // Send email
-    await transporter.sendMail(mailOptions);
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', info.messageId);
 
     return res.status(200).json({ 
       success: true, 
@@ -75,7 +91,8 @@ This message was sent from your portfolio contact form.
     console.error('Email sending error:', error);
     return res.status(500).json({ 
       error: 'Failed to send email',
-      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      details: error.message || 'Unknown error occurred',
+      code: error.code
     });
   }
 }
