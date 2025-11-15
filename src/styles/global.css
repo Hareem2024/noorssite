@@ -655,6 +655,21 @@ main {
   color: var(--accent);
   text-decoration: none;
   font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.projects__link:hover {
+  transform: translateY(-2px);
+  color: var(--text-primary);
+}
+
+.projects__link svg {
+  display: inline-block;
+  vertical-align: middle;
+  fill: currentColor;
 }
 
 .resume {
