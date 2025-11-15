@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import AccentBadge from '../components/AccentBadge.jsx';
 import RubiksCube from '../components/RubiksCube.jsx';
 
 export default function HeroSection() {
@@ -11,18 +10,13 @@ export default function HeroSection() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.1, ease: 'easeOut' }}
       >
-        <AccentBadge text="Machine Learning Architect" />
         <h1>
-          <span className="hero__line hero__line--primary">Architecting machine</span>
-          <span className="hero__line">learning pipelines</span>
-          <span className="hero__line">
-            with <span>precision</span>.
-          </span>
+          <span className="hero__line hero__line--primary">Hi, I'm <span>Noor</span> !</span>
+          <span className="hero__line">I'm an <span>AI Engineer</span></span>
+          <span className="hero__line">Based in <span>Hamburg</span></span>
         </h1>
         <p>
-          Noor is a machine learning engineer focused on turning research breakthroughs into polished,
-          human-centered experiences. From model ideation to production inference, I design pipelines
-          that balance precision, ethics, and delight.
+          I build machine learning systems that are reliable, scalable, and deeply user-focused.
         </p>
         <div className="hero__cta">
           <a className="button button--primary" href="#projects">
