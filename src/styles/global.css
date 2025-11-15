@@ -840,6 +840,26 @@ main {
     backdrop-filter: none !important;
   }
 
+  /* REORDER HERO SECTION - CUBE FIRST */
+  .hero {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 2rem;
+  }
+
+  .hero__visual {
+    order: -1;
+    justify-self: center;
+    margin-top: 1rem;
+  }
+
+  .hero__card {
+    order: 1;
+    justify-self: center;
+    width: min(100%, 520px);
+    margin-right: 0;
+  }
+
   main {
     padding-top: 85px;
   }
